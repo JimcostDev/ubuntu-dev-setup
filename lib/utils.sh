@@ -29,7 +29,7 @@ print_line() {
 step() {
     echo
     print_line
-    printf "%b\n" "${CYAN}$1${NC}"
+    printf "${CYAN}%s${NC}\n" "$1"
     print_line
 }
 
@@ -49,6 +49,11 @@ error() {
     printf "%b\n" "${RED}[FAIL]${NC} $1"
 }
 
+finish() {
+    echo
+    success "$1"
+}
+
 # ==========================================================
 # Helpers
 # ==========================================================
@@ -65,26 +70,47 @@ directory_exists() {
     [[ -d "$1" ]]
 }
 
-# Añade una línea a un archivo solo si no existe
 append_line_if_missing() {
 
     local line="$1"
     local file="$2"
 
-    grep -qxF "$line" "$file" || echo "$line" >> "$file"
+    grep -qxF "$line" "$file" 2>/dev/null || echo "$line" >> "$file"
 }
 
-# Reemplaza una línea que comience por un patrón
 replace_or_append() {
 
     local pattern="$1"
     local newline="$2"
     local file="$3"
 
-    if grep -q "^${pattern}" "$file"; then
-        sed -i "s|^${pattern}.*|${newline}|" "$file"
+    if grep -Eq "$pattern" "$file" 2>/dev/null; then
+        sed -Ei "s|$pattern.*|$newline|" "$file"
     else
         echo "$newline" >> "$file"
+    fi
+}
+
+download_file() {
+
+    local url="$1"
+    local output="$2"
+
+    info "Descargando $(basename "$output")..."
+
+    curl --progress-bar -fL "$url" -o "$output"
+}
+
+# ==========================================================
+# Shell
+# ==========================================================
+
+get_shell_profile() {
+
+    if [[ "$SHELL" == */zsh ]]; then
+        echo "$HOME/.zshrc"
+    else
+        echo "$HOME/.profile"
     fi
 }
 
@@ -112,6 +138,8 @@ load_config() {
 
 require_sudo() {
 
+    info "Solicitando permisos de administrador..."
+
     sudo -v
 }
 
@@ -123,26 +151,34 @@ require_command() {
     fi
 }
 
-# ==========================================================
-# Downloads
-# ==========================================================
+require_ubuntu() {
 
-download_file() {
+    if [[ ! -f /etc/os-release ]]; then
+        error "Sistema operativo no soportado."
+        exit 1
+    fi
 
-    local url="$1"
-    local output="$2"
+    # shellcheck disable=SC1091
+    source /etc/os-release
 
-    info "Descargando $(basename "$output")..."
-
-    curl -fsSL "$url" -o "$output"
+    if [[ "$ID" != "ubuntu" ]]; then
+        error "Este proyecto solo es compatible con Ubuntu."
+        exit 1
+    fi
 }
 
 # ==========================================================
-# Finish
+# Information
 # ==========================================================
 
-finish() {
+print_version() {
+
+    local command="$1"
+
+    require_command "$command"
 
     echo
-    success "$1"
+    info "$command"
+
+    "$command" --version | head -n 1
 }
