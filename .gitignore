@@ -1,0 +1,14 @@
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Bash history
+.bash_history
