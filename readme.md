@@ -1,130 +1,47 @@
 # Ubuntu Dev Setup
 
-> 🚀 Automatización completa de una estación de trabajo para desarrollo de software sobre Ubuntu 24.04 LTS.
+Scripts personales para configurar y reconstruir mi entorno de desarrollo en Ubuntu.
 
----
+El objetivo de este proyecto es automatizar la instalación y configuración de las herramientas que utilizo habitualmente para desarrollo de software, evitando tener que recordar o repetir manualmente todo el proceso cada vez que instalo Ubuntu en un equipo nuevo.
 
-## Objetivo
+## ¿Qué configura?
 
-Este proyecto nace con un único propósito:
+El proyecto cubre principalmente:
 
-Poder instalar y configurar un entorno completo de desarrollo en un equipo nuevo mediante scripts reproducibles, documentados y fáciles de mantener.
+- Sistema base y herramientas esenciales.
+- Git y SSH.
+- Visual Studio Code.
+- Docker y Docker Compose.
+- Go.
+- Python.
+- Node.js mediante NVM.
+- Flutter y Dart.
+- MongoDB Compass.
+- Herramientas de creación de contenido.
+- Aplicaciones y personalización de Ubuntu.
 
-Cada módulo tiene una única responsabilidad y puede ejecutarse de forma independiente o como parte de la instalación completa.
+## Uso
 
----
+El proyecto está pensado para uso personal.
 
-## Tecnologías incluidas
+Los scripts están organizados por módulos para poder ejecutar únicamente lo que necesite en cada instalación.
 
-- Ubuntu 24.04 LTS
-- Git
-- Docker
-- Go
-- Python
-- Node.js (NVM)
-- Flutter
-- Visual Studio Code
-- GNOME
-- Herramientas de productividad
-- Aplicaciones de desarrollo
-
----
-
-## Filosofía
-
-Este proyecto sigue varios principios:
-
-- Scripts pequeños y reutilizables.
-- Una única responsabilidad por script.
-- Configuración modular.
-- Documentación de cada módulo.
-- Automatización reproducible.
-- Idempotencia siempre que sea posible.
-
----
-
-## Estructura
-
-```
-ubuntu-dev-setup/
-
-├── install.sh
-├── lib/
-│   └── utils.sh
-│
-├── 01-system/
-├── 02-git/
-├── 03-docker/
-├── 04-go/
-├── 05-node/
-├── 06-python/
-├── 07-flutter/
-├── 08-vscode/
-├── 09-gnome/
-└── 10-apps/
-```
-
----
-
-## Instalación
-
-Clonar el repositorio:
-
-```bash
-git clone git@github.com:JimcostDev/ubuntu-dev-setup.git
-```
-
-Entrar en el proyecto:
-
-```bash
-cd ubuntu-dev-setup
-```
-
-Dar permisos:
-
-```bash
-chmod +x install.sh
-```
-
-Ejecutar:
+El punto de entrada general es:
 
 ```bash
 ./install.sh
 ```
 
----
+## Configuración personal
 
-## Orden de los módulos
+Los valores específicos de mi entorno se mantienen en:
 
-Los módulos se ejecutan automáticamente según su numeración.
-
-```
-01-system
-02-git
-03-docker
-04-go
-05-node
-06-python
-07-flutter
-08-vscode
-09-gnome
-10-apps
+```bash
+user.conf
 ```
 
----
+## Filosofía
 
-## Estado del proyecto
+El proyecto busca que una instalación limpia de Ubuntu pueda convertirse rápidamente en mi entorno habitual de desarrollo de forma reproducible, sencilla y mantenible.
 
-- ✅ Sistema Base
-- 🚧 Git
-- ⏳ Docker
-- ⏳ Go
-- ⏳ Node.js
-- ⏳ Python
-- ⏳ Flutter
-- ⏳ VS Code
-- ⏳ GNOME
-- ⏳ Aplicaciones
-
----
-
+No pretende ser un instalador universal para cualquier usuario.
