@@ -110,6 +110,90 @@ NODE_VERSION="lts/*"
 # ... otras variables
 ```
 
+## Variables de entorno
+
+Además de la configuración almacenada en `user.conf`, algunos proyectos de desarrollo utilizan variables de entorno globales.
+
+Actualmente deben existir las siguientes variables:
+
+- `MONGO_URI`
+- `JWT_SECRET_KEY`
+
+Estas variables se configuran de forma persistente para el usuario en:
+
+    ~/.profile
+
+### Configuración
+
+Después de instalar y configurar el sistema, abrir `~/.profile` desde VS Code:
+
+    code ~/.profile
+
+Añadir al final del archivo:
+
+```bash
+# JimcostDev development environment
+export MONGO_URI="mongodb+srv://<user>:<password>@<cluster>/<database>"
+export JWT_SECRET_KEY="<secret>"
+```
+
+Los valores anteriores son únicamente ejemplos.
+
+Deben sustituirse por los valores reales utilizados por los proyectos.
+
+Después de guardar el archivo, cargar nuevamente la configuración:
+
+```bash
+source ~/.profile
+```
+
+### Verificación
+
+Comprobar que las variables existen:
+
+```bash
+printenv MONGO_URI
+printenv JWT_SECRET_KEY
+```
+
+También se puede comprobar:
+
+```bash
+echo "$MONGO_URI"
+echo "$JWT_SECRET_KEY"
+```
+
+Si las variables aparecen correctamente, estarán disponibles para los procesos iniciados por el usuario.
+
+### Importante después de reinstalar Ubuntu
+
+Si se reinstala Ubuntu desde cero, recordar volver a crear estas dos variables en:
+
+    ~/.profile
+
+Crear:
+
+    MONGO_URI
+    JWT_SECRET_KEY
+
+Estas variables no forman parte de `user.conf` porque contienen información sensible.
+
+### Seguridad
+
+Los valores reales nunca deben almacenarse en este repositorio.
+
+No incluir valores reales de estas variables en:
+
+- `README.md`
+- `user.conf`
+- Scripts
+- Commits
+- Issues
+- Capturas de pantalla
+- Archivos públicos
+
+Nunca subir contraseñas, tokens, claves privadas o secretos a Git.
+
 ## Módulos
 
 ### System
@@ -297,6 +381,8 @@ Esto proporciona simplicidad para una instalación nueva sin sacrificar la modul
 Los scripts están diseñados para poder ejecutarse nuevamente después de una reinstalación de Ubuntu.
 
 El objetivo es que el sistema pueda volver a un estado de desarrollo funcional sin tener que recordar manualmente todos los pasos realizados anteriormente.
+
+Después de una reinstalación también se deben recuperar las variables de entorno personales descritas en la sección `Variables de entorno`.
 
 ## Estado del proyecto
 
