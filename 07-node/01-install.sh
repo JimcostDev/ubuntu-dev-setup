@@ -43,8 +43,6 @@ install_node() {
 
 main() {
 
-    require_sudo
-
     install_nvm
 
     install_node

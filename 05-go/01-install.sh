@@ -62,6 +62,11 @@ main() {
 
     step "Instalando Go"
 
+    if command_exists "go" && go version | grep -q "${GO_VERSION}"; then
+        warning "Go ${GO_VERSION} ya está instalado. Omitiendo."
+        exit 0
+    fi
+
     download_go
 
     install_go

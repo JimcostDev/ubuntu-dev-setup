@@ -12,3 +12,14 @@
 
 # Bash history
 .bash_history
+
+# Python
+__pycache__/
+*.pyc
+
+# Paquetes y descargas
+*.deb
+*.tar.gz
+
+# Antigravity IDE
+.agents/

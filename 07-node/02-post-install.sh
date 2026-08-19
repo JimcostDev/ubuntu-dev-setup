@@ -18,7 +18,9 @@ append_line_if_missing "# NVM" "$PROFILE"
 append_line_if_missing 'export NVM_DIR="$HOME/.nvm"' "$PROFILE"
 append_line_if_missing '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' "$PROFILE"
 
-source "$PROFILE"
+export NVM_DIR="$HOME/.nvm"
+# shellcheck disable=SC1091
+source "$NVM_DIR/nvm.sh"
 
 corepack enable
 

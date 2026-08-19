@@ -50,10 +50,12 @@ read -rp "Pulsa Enter cuando hayas añadido la clave en GitHub..."
 
 step "Probando conexión con GitHub"
 
-if ssh -T git@github.com; then
-    success "Autenticación SSH verificada correctamente."
+# Github returns exit code 1 even on successful authentication
+# so we must check the output instead of the exit code.
+if ssh -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
+    success "Conexión a GitHub verificada."
 else
-    warning "No se pudo verificar la conexión SSH. Comprueba que la clave pública esté añadida en GitHub."
+    warning "No se pudo verificar la conexión con GitHub. Comprueba que la clave pública esté añadida en GitHub."
 fi
 
 success "Configuración SSH finalizada."

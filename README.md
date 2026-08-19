@@ -41,14 +41,25 @@ El proyecto sigue algunas reglas:
 La estructura general del proyecto está organizada por módulos.
 
     ubuntu-dev-setup/
+    ├── .editorconfig
+    ├── .gitignore
     ├── README.md
-    ├── config/
+    ├── bootstrap.sh
+    ├── install.sh
+    ├── user.conf
     ├── lib/
     │   └── utils.sh
     ├── 01-system/
     ├── 02-git/
-    ├── 03-ssh/
-    ├── ...
+    ├── 03-vscode/
+    ├── 04-docker/
+    ├── 05-go/
+    ├── 06-python/
+    ├── 07-node/
+    ├── 08-flutter/
+    ├── 09-mongodb-compass/
+    ├── 10-insomnia/
+    ├── 11-antigravity/
     ├── 12-obs/
     └── 13-gnome/
 
@@ -88,6 +99,16 @@ Esto permite cambiar valores como:
 - Preferencias específicas
 
 sin modificar todos los scripts.
+
+Ejemplo de `user.conf`:
+
+```ini
+GIT_NAME="Nombre"
+GIT_EMAIL="correo@ejemplo.com"
+GO_VERSION="1.26.6"
+NODE_VERSION="lts/*"
+# ... otras variables
+```
 
 ## Módulos
 
@@ -282,13 +303,18 @@ El objetivo es que el sistema pueda volver a un estado de desarrollo funcional s
 El setup actualmente incluye configuraciones para:
 
 - Sistema Ubuntu
-- Git
-- SSH
+- Git y SSH
+- Visual Studio Code
 - Docker
-- Herramientas de desarrollo
+- Go
+- Python
+- Node.js
+- Flutter
+- MongoDB Compass
+- Insomnia
+- Antigravity IDE y CLI
 - OBS Studio
-- GNOME
-- Atajos de teclado
+- GNOME y Atajos de teclado
 - Configuraciones específicas del AORUS
 
 El proyecto continúa evolucionando a medida que se incorporan nuevas herramientas al entorno de desarrollo.

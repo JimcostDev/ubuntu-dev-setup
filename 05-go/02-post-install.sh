@@ -19,22 +19,15 @@ load_config
 
 PROFILE="$HOME/.profile"
 
-append_if_missing() {
-
-    local LINE="$1"
-
-    grep -qxF "$LINE" "$PROFILE" || echo "$LINE" >> "$PROFILE"
-}
-
 step "Configurando Go"
 
 mkdir -p "$HOME/go"/{bin,pkg,src}
 
-append_if_missing ""
-append_if_missing "# Go"
-append_if_missing "export GOROOT=/usr/local/go"
-append_if_missing "export GOPATH=\$HOME/go"
-append_if_missing "export PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin"
+append_line_if_missing "" "$PROFILE"
+append_line_if_missing "# Go" "$PROFILE"
+append_line_if_missing "export GOROOT=/usr/local/go" "$PROFILE"
+append_line_if_missing "export GOPATH=\$HOME/go" "$PROFILE"
+append_line_if_missing "export PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin" "$PROFILE"
 
 success "Variables de entorno configuradas."
 
